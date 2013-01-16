@@ -1,10 +1,13 @@
 require 'cuba'
 require "omniauth-buffer2"
+require 'yaml'
+
+config = YAML.load_file( 'config.yml' )["api"]
 
 Cuba.use Rack::Session::Cookie, key: ENV["RACK_SESSION_KEY"] || "session key", secret: ENV["RACk_SESSION_SECRET"] || "session secret"
 
 Cuba.use OmniAuth::Builder do
-  provider :buffer, "__your_client_id__", "__your_client_secret__ ", grant_type: "authorization_code"
+  provider :buffer, config["client_id"], config["client_secret"] , grant_type: "authorization_code"
 end
 
 Cuba.define do
