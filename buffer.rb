@@ -15,7 +15,9 @@ Cuba.define do
   on get, "auth" do
     on ":provider/callback", param("state"), param("code")   do | provider, state, code |
       auth = env["omniauth.auth"]
-      res.write auth["credentials"]["token"]
+      res.write "<input type='hidden' value='#{auth["credentials"]["token"]}' id='access_token'/>"
+      res.write "Successfully authenticated!"
+      # res.write auth["credentials"]["token"]
     end
 
     on "failure" do
