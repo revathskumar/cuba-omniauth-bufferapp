@@ -21,7 +21,7 @@ Cuba.define do
     end
 
     on "failure" do
-      res.write "auth_failure"
+      res.write "Buffer app Authentication failed!"
     end
   end
 
